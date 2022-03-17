@@ -4,7 +4,7 @@ import * as React from "react";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
 import { Box } from "@material-ui/core";
-import {get} from "cheerio/lib/api/traversing";
+//import { get } from "cheerio/lib/api/traversing";
 
 let provinces = [];
 // eslint-disable-next-line no-unused-vars
@@ -23,7 +23,6 @@ async function getProvince() {
 }
 getProvince().then(() => console.log(`All provinces : ${provinces}`));
 
-
 let concises = [];
 // eslint-disable-next-line no-unused-vars
 async function getConcise() {
@@ -33,7 +32,8 @@ async function getConcise() {
     $("body > table > tbody > tr").each((index, element) => {
       let check = $($(element).find("td")[1]).text();
       check = check.replace(/\r?\n|\r/g, " ").replace(/ /g, "");
-      concises.push(check);
+      var result = check.split("-");
+      concises.push(result[1]);
     });
   } catch (error) {
     console.error(error);
@@ -48,7 +48,7 @@ export default function ControllableStates() {
 
   return (
     <div style={{ paddingLeft: 100 }}>
-      <Box height={50} />
+      <Box height={14} />
       <Autocomplete
         value={value}
         onChange={(event, newValue) => {
@@ -65,7 +65,21 @@ export default function ControllableStates() {
           <TextField {...params} label="Select Province" />
         )}
       />
+      <Box height={14} />
+      <Autocomplete
+        value={value}
+        onChange={(event, newValue) => {
+          setValue(newValue);
+        }}
+        inputValue={inputValue}
+        onInputChange={(event, newInputValue) => {
+          setInputValue(newInputValue);
+        }}
+        id="controllable-states-demo"
+        options={concises}
+        sx={{ width: 300 }}
+        renderInput={(params) => <TextField {...params} label="Type" />}
+      />
     </div>
-
   );
 }
