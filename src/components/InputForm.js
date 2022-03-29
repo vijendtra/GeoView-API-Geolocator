@@ -9,6 +9,9 @@ import { Autocomplete, Box, TextField } from "@mui/material";
 let geoData = [];
 async function getgeoName(searchValue) {
   let searchItem = searchValue.concat("*");
+  if (geoData.length !== 0) {
+    geoData = [];
+  }
   try {
     const result = await geogratisAPI.get("/geonames.json", {
       params: {
@@ -42,9 +45,6 @@ async function getgeoName(searchValue) {
 function InputForm() {
   const [name, setName] = React.useState();
   const handleChange = (event) => {
-    if (geoData.length !== 0) {
-      geoData = [];
-    }
     setName(event.target.value);
     getgeoName(event.target.value);
     console.log(event.target.value);
@@ -60,7 +60,6 @@ function InputForm() {
       autoComplete="off"
     >
       <Autocomplete
-        options={geoData}
         renderInput={(params) => (
           <TextField
             {...params}
@@ -70,6 +69,7 @@ function InputForm() {
             onChange={handleChange}
           />
         )}
+        options={geoData}
       />
     </Box>
   );

@@ -6,8 +6,8 @@ import "./App.css";
 import InputForm from "../src/components/InputForm.js";
 
 ReactDOM.render(
-    <StyledEngineProvider injectFirst>
-        <InputForm />
-    </StyledEngineProvider>,
-    document.querySelector("#root")
+  <StyledEngineProvider injectFirst>
+    <InputForm />
+  </StyledEngineProvider>,
+  document.querySelector("#root")
 );
