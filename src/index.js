@@ -1,13 +1,11 @@
-import * as React from "react";
+import React from "react";
 import ReactDOM from "react-dom";
-import { StyledEngineProvider } from "@mui/material/styles";
-import "./index.css";
 import "./App.css";
-import InputForm from "../src/components/InputForm.js";
+import App from "./App";
 
 ReactDOM.render(
-  <StyledEngineProvider injectFirst>
-    <InputForm />
-  </StyledEngineProvider>,
-  document.querySelector("#root")
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+  document.getElementById("root")
 );
